@@ -44,7 +44,7 @@ class Shop:
 #############                                         SHOP_FUNCTIONS                                               #############
 #### ====================================================================================================================== ####
 
-def update_shop(shop, current_currency, settings):
+def update_shop(shop, current_currency, settings, mclick):
     ''' Helper function that updates the Shop.
     Input: Shop Object, current currency (int), Settings Object
     Output: None
@@ -52,6 +52,7 @@ def update_shop(shop, current_currency, settings):
     # Handle Mouse-Over tower in shop, sets it as 'selected_item' for rendering purposes
     # Also handles unaffordable towers in shop (switched to available to False)
     shop.selected_item = None
+    selectSth = False
     (mX, mY) = pygame.mouse.get_pos()
     for item in shop.shop_data:
         if current_currency < shop.shop_data[item]["cost"]:
@@ -60,6 +61,18 @@ def update_shop(shop, current_currency, settings):
             shop.shop_data[item]["available"] = True
         if (mX > shop.shop_data[item]["location"][0] and mX < shop.shop_data[item]["location"][0] + shop.ui_data["item_size"]) and (mY > shop.shop_data[item]["location"][1] and mY < shop.shop_data[item]["location"][1] + shop.ui_data["item_size"]):
                 shop.selected_item = item
+
+    if (mclick):
+        # if (not selectSth):
+        shop.clicked_item = shop.selected_item 
+            # selectSth = True           
+            # print("-------check-------"+shop.selected_item)
+
+    # if (not mclick):
+    #     if (selectSth):
+    #         return shop.clicked_item, shop.ui_data["radius_sprite"], (mX, mY)
+    #     selectSth = False
+
     # Replace with code to update the Shop
     pass # Remove this once you've completed the code
 
