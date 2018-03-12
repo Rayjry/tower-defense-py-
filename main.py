@@ -79,12 +79,14 @@ def update(game_data):
     Input: game_data
     Output: None
     '''
-    # item, rad_sp, pos = update_shop(
-    update_shop(game_data["shop"], game_data["current_currency"], game_data["settings"], game_data["clicked"])
+    item, rad_sp, pos = update_shop(game_data["shop"], game_data["current_currency"], game_data["settings"], game_data["clicked"])
+    
 
-    # if (item):
-    #     newTower = Tower(item, pos, rad_sp)
-    #     game_data["towers"].append(newTower)
+    if (item is not -1 and pos is not -1 and rad_sp is not -1):
+        game_data["shop"].clicked_item = None
+        newTower = Tower(item, pos, rad_sp)
+        game_data["towers"].append(newTower)
+        # print("new tower")
 
     ## Replace this with code to update the Enemies ##
 

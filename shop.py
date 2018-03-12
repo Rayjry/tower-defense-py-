@@ -52,7 +52,6 @@ def update_shop(shop, current_currency, settings, mclick):
     # Handle Mouse-Over tower in shop, sets it as 'selected_item' for rendering purposes
     # Also handles unaffordable towers in shop (switched to available to False)
     shop.selected_item = None
-    selectSth = False
     (mX, mY) = pygame.mouse.get_pos()
     for item in shop.shop_data:
         if current_currency < shop.shop_data[item]["cost"]:
@@ -63,18 +62,14 @@ def update_shop(shop, current_currency, settings, mclick):
                 shop.selected_item = item
 
     if (mclick):
-        # if (not selectSth):
-        shop.clicked_item = shop.selected_item 
-            # selectSth = True           
-            # print("-------check-------"+shop.selected_item)
+        if shop.selected_item is not None:
+            shop.clicked_item = shop.selected_item
+        elif shop.clicked_item is not None:
+            return shop.clicked_item, shop.ui_data["radius_sprite"], (mX, mY)
 
-    # if (not mclick):
-    #     if (selectSth):
-    #         return shop.clicked_item, shop.ui_data["radius_sprite"], (mX, mY)
-    #     selectSth = False
-
+    return -1,-1,-1
     # Replace with code to update the Shop
-    pass # Remove this once you've completed the code
+    # pass # Remove this once you've completed the code
 
 def render_shop(shop, screen, settings, current_currency):
     ''' Helper function that renders the Shop.
